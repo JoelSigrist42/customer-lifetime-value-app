@@ -1,122 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>Customer Lifetime Value (JavaScript Version)</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-margin: 20px;
-max-width: 900px;
-}
-h1, h2 {
-margin-bottom: 0.5em;
-}
-.service-section {
-border: 1px solid #ccc;
-padding: 10px;
-margin-bottom: 15px;
-}
-.tier-fields {
-margin-left: 20px;
-margin-bottom: 10px;
-}
-label {
-display: block;
-margin-top: 8px;
-}
-input[type="number"] {
-width: 80px;
-}
-.results {
-margin-top: 20px;
-padding: 10px;
-background: #f9f9f9;
-border: 1px solid #ccc;
-}
-.hidden {
-display: none;
-}
-.custom-service {
-margin-bottom: 10px;
-}
-</style>
+  <meta charset="UTF-8" />
+  <title>Customer Lifetime Value (JavaScript Version)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      max-width: 900px;
+    }
+    h1, h2 {
+      margin-bottom: 0.5em;
+    }
+    .service-section {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    .tier-fields {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 8px;
+    }
+    input[type="number"] {
+      width: 80px;
+    }
+    .results {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+    }
+    .hidden {
+      display: none;
+    }
+    .custom-service {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
 
 <h1>Customer Lifetime Value Calculator</h1>
 
 <p>
-Select which preset services to include, specify tiers, and add any custom services you need.
-Then fill in the global data and click "Calculate"!
+  Select which preset services to include, specify tiers, and add any custom services you need.
+  Then fill in the global data and click "Calculate"!
 </p>
 
 <!-- PRESET SERVICES -->
 <div id="presetServices" class="service-section">
-<h2>Preset Services</h2>
-<div>
-<label>
-<input type="checkbox" class="preset-check" data-service="Residential Internet" />
-Residential Internet
-</label>
-<div class="tier-fields hidden" id="tierFields-Residential Internet"></div>
-</div>
-<div>
-<label>
-<input type="checkbox" class="preset-check" data-service="TV" />
-TV
-</label>
-<div class="tier-fields hidden" id="tierFields-TV"></div>
-</div>
-<div>
-<label>
-<input type="checkbox" class="preset-check" data-service="Security" />
-Security
-</label>
-<div class="tier-fields hidden" id="tierFields-Security"></div>
-</div>
-<div>
-<label>
-<input type="checkbox" class="preset-check" data-service="Managed Wi-Fi" />
-Managed Wi-Fi
-</label>
-<div class="tier-fields hidden" id="tierFields-Managed Wi-Fi"></div>
-</div>
-<div>
-<label>
-<input type="checkbox" class="preset-check" data-service="Phone" />
-Phone
-</label>
-<div class="tier-fields hidden" id="tierFields-Phone"></div>
-</div>
+  <h2>Preset Services</h2>
+  <div>
+    <label>
+      <input type="checkbox" class="preset-check" data-service="Residential Internet" />
+      Residential Internet
+    </label>
+    <div class="tier-fields hidden" id="tierFields-Residential Internet"></div>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" class="preset-check" data-service="TV" />
+      TV
+    </label>
+    <div class="tier-fields hidden" id="tierFields-TV"></div>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" class="preset-check" data-service="Security" />
+      Security
+    </label>
+    <div class="tier-fields hidden" id="tierFields-Security"></div>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" class="preset-check" data-service="Managed Wi-Fi" />
+      Managed Wi-Fi
+    </label>
+    <div class="tier-fields hidden" id="tierFields-Managed Wi-Fi"></div>
+  </div>
+  <div>
+    <label>
+      <input type="checkbox" class="preset-check" data-service="Phone" />
+      Phone
+    </label>
+    <div class="tier-fields hidden" id="tierFields-Phone"></div>
+  </div>
 </div>
 
 <!-- CUSTOM SERVICES -->
 <div class="service-section">
-<h2>Add Custom Services</h2>
-<div id="customServiceContainer"></div>
-<div>
-<label>Service Name: <input type="text" id="customServiceName" /></label>
-<label>Number of Tiers: <input type="number" id="customServiceTiers" min="1" value="1"/></label>
-<button type="button" id="addCustomServiceBtn">Add Custom Service</button>
-</div>
+  <h2>Add Custom Services</h2>
+  <div id="customServiceContainer"></div>
+  <div>
+    <label>Service Name: <input type="text" id="customServiceName" /></label>
+    <label>Number of Tiers: <input type="number" id="customServiceTiers" min="1" value="1"/></label>
+    <button type="button" id="addCustomServiceBtn">Add Custom Service</button>
+  </div>
 </div>
 
 <!-- GLOBAL DATA -->
 <div class="service-section">
-<h2>Global Data</h2>
-<label>Customer Lifespan (months):
-<input type="number" id="lifespan" value="24" />
-</label>
-<label>Take Rate (%):
-<input type="number" id="takeRate" placeholder="e.g. 40" />
-</label>
-<label>Homes Passed:
-<input type="number" id="homesPassed" placeholder="e.g. 10000" />
-</label>
-<label>Target Take Rate (%):
-<input type="number" id="targetTakeRate" placeholder="e.g. 60" />
-</label>
+  <h2>Global Data</h2>
+  <label>Customer Lifespan (months):
+    <input type="number" id="lifespan" value="24" />
+  </label>
+  <label>Take Rate (%):
+    <input type="number" id="takeRate" placeholder="e.g. 40" />
+  </label>
+  <label>Homes Passed:
+    <input type="number" id="homesPassed" placeholder="e.g. 10000" />
+  </label>
+  <label>Target Take Rate (%):
+    <input type="number" id="targetTakeRate" placeholder="e.g. 60" />
+  </label>
 </div>
 
 <button type="button" id="calculateBtn">Calculate</button>
@@ -125,296 +125,296 @@ Phone
 
 <script>
 /*********************
-* 1) Utility: Show or Hide an Element
-*********************/
+ * 1) Utility: Show or Hide an Element
+ *********************/
 function show(el) {
-el.classList.remove('hidden');
+  el.classList.remove('hidden');
 }
 function hide(el) {
-el.classList.add('hidden');
+  el.classList.add('hidden');
 }
 
 /*********************
-* 2) Handling Preset Services
-*********************/
+ * 2) Handling Preset Services
+ *********************/
 document.querySelectorAll('.preset-check').forEach(chk => {
-chk.addEventListener('change', () => {
-const svcName = chk.getAttribute('data-service');
-const fieldDiv = document.getElementById('tierFields-' + svcName);
+  chk.addEventListener('change', () => {
+    const svcName = chk.getAttribute('data-service');
+    const fieldDiv = document.getElementById('tierFields-' + svcName);
 
-if (chk.checked) {
-// Reveal a field asking "How many tiers?"
-generateTierPrompt(fieldDiv, svcName);
-show(fieldDiv);
-} else {
-// Clear out fields & hide
-fieldDiv.innerHTML = '';
-hide(fieldDiv);
-}
-});
+    if (chk.checked) {
+      // Reveal a field asking "How many tiers?"
+      generateTierPrompt(fieldDiv, svcName);
+      show(fieldDiv);
+    } else {
+      // Clear out fields & hide
+      fieldDiv.innerHTML = '';
+      hide(fieldDiv);
+    }
+  });
 });
 
 function generateTierPrompt(container, serviceName) {
-container.innerHTML = `
-<label>How many tiers for ${serviceName}?</label>
-<input type="number" min="1" value="1" class="tierCount" data-service="${serviceName}" />
-<button type="button" class="generateFieldsBtn" data-service="${serviceName}">Generate Fields</button>
-<div class="tierList" id="tierList-${serviceName}"></div>
-`;
+  container.innerHTML = `
+    <label>How many tiers for ${serviceName}?</label>
+    <input type="number" min="1" value="1" class="tierCount" data-service="${serviceName}" />
+    <button type="button" class="generateFieldsBtn" data-service="${serviceName}">Generate Fields</button>
+    <div class="tierList" id="tierList-${serviceName}"></div>
+  `;
 
-container.querySelector('.generateFieldsBtn').addEventListener('click', (e) => {
-const tierCountEl = container.querySelector('.tierCount');
-const numTiers = parseInt(tierCountEl.value, 10) || 1;
-generateTierFields(serviceName, numTiers);
-});
+  container.querySelector('.generateFieldsBtn').addEventListener('click', (e) => {
+    const tierCountEl = container.querySelector('.tierCount');
+    const numTiers = parseInt(tierCountEl.value, 10) || 1;
+    generateTierFields(serviceName, numTiers);
+  });
 }
 
 function generateTierFields(serviceName, numTiers) {
-const tierListDiv = document.getElementById('tierList-' + serviceName);
-tierListDiv.innerHTML = ''; // clear existing
+  const tierListDiv = document.getElementById('tierList-' + serviceName);
+  tierListDiv.innerHTML = ''; // clear existing
 
-for (let i = 1; i <= numTiers; i++) {
-const div = document.createElement('div');
-div.innerHTML = `
-<label>Plan ${i} Cost ($): <input type="number" step="0.01" class="priceField" /></label>
-<label>Plan ${i} Adoption (%): <input type="number" step="0.01" class="adoptionField" /></label>
-`;
-tierListDiv.appendChild(div);
-}
+  for (let i = 1; i <= numTiers; i++) {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <label>Plan ${i} Cost ($): <input type="number" step="0.01" class="priceField" /></label>
+      <label>Plan ${i} Adoption (%): <input type="number" step="0.01" class="adoptionField" /></label>
+    `;
+    tierListDiv.appendChild(div);
+  }
 }
 
 /*********************
-* 3) Handling Custom Services
-*********************/
+ * 3) Handling Custom Services
+ *********************/
 const customContainer = document.getElementById('customServiceContainer');
 document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
-const svcNameInput = document.getElementById('customServiceName');
-const tiersInput = document.getElementById('customServiceTiers');
+  const svcNameInput = document.getElementById('customServiceName');
+  const tiersInput = document.getElementById('customServiceTiers');
 
-const svcName = svcNameInput.value.trim();
-if (!svcName) {
-alert("Please enter a service name.");
-return;
-}
-const numTiers = parseInt(tiersInput.value, 10) || 1;
+  const svcName = svcNameInput.value.trim();
+  if (!svcName) {
+    alert("Please enter a service name.");
+    return;
+  }
+  const numTiers = parseInt(tiersInput.value, 10) || 1;
 
-// Create a new section for this custom service
-const customId = 'custom-' + svcName.replace(/\s+/g, '_') + '-' + Date.now();
-const div = document.createElement('div');
-div.className = 'custom-service';
-div.innerHTML = `
-<h4>${svcName} <button type="button" data-id="${customId}" class="removeCustomBtn">Remove</button></h4>
-<div>
-<label>Number of Tiers: </label>
-<input type="number" value="${numTiers}" min="1" class="tierCount" data-service="${svcName}" />
-<button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">Generate Fields</button>
-</div>
-<div class="tierList" id="tierList-${customId}"></div>
-`;
-customContainer.appendChild(div);
+  // Create a new section for this custom service
+  const customId = 'custom-' + svcName.replace(/\s+/g, '_') + '-' + Date.now();
+  const div = document.createElement('div');
+  div.className = 'custom-service';
+  div.innerHTML = `
+    <h4>${svcName} <button type="button" data-id="${customId}" class="removeCustomBtn">Remove</button></h4>
+    <div>
+      <label>Number of Tiers: </label>
+      <input type="number" value="${numTiers}" min="1" class="tierCount" data-service="${svcName}" />
+      <button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">Generate Fields</button>
+    </div>
+    <div class="tierList" id="tierList-${customId}"></div>
+  `;
+  customContainer.appendChild(div);
 
-// Immediately generate the fields for convenience
-generateCustomTierFields(customId, svcName, numTiers);
+  // Immediately generate the fields for convenience
+  generateCustomTierFields(customId, svcName, numTiers);
 
-// Clear the add form
-svcNameInput.value = '';
-tiersInput.value = '1';
+  // Clear the add form
+  svcNameInput.value = '';
+  tiersInput.value = '1';
 
-// Attach event to "Generate Fields" button
-div.querySelector('.generateFieldsBtn').addEventListener('click', e => {
-const localTiersCount = parseInt(div.querySelector('.tierCount').value, 10) || 1;
-generateCustomTierFields(customId, svcName, localTiersCount);
-});
+  // Attach event to "Generate Fields" button
+  div.querySelector('.generateFieldsBtn').addEventListener('click', e => {
+    const localTiersCount = parseInt(div.querySelector('.tierCount').value, 10) || 1;
+    generateCustomTierFields(customId, svcName, localTiersCount);
+  });
 
-// Attach event to "Remove" button
-div.querySelector('.removeCustomBtn').addEventListener('click', e => {
-customContainer.removeChild(div);
-});
+  // Attach event to "Remove" button
+  div.querySelector('.removeCustomBtn').addEventListener('click', e => {
+    customContainer.removeChild(div);
+  });
 });
 
 function generateCustomTierFields(containerId, svcName, numTiers) {
-const tierListDiv = document.getElementById('tierList-' + containerId);
-tierListDiv.innerHTML = '';
-for (let i = 1; i <= numTiers; i++) {
-const row = document.createElement('div');
-row.innerHTML = `
-<label>Plan ${i} Cost ($): <input type="number" step="0.01" class="priceField" /></label>
-<label>Plan ${i} Adoption (%): <input type="number" step="0.01" class="adoptionField" /></label>
-`;
-tierListDiv.appendChild(row);
-}
+  const tierListDiv = document.getElementById('tierList-' + containerId);
+  tierListDiv.innerHTML = '';
+  for (let i = 1; i <= numTiers; i++) {
+    const row = document.createElement('div');
+    row.innerHTML = `
+      <label>Plan ${i} Cost ($): <input type="number" step="0.01" class="priceField" /></label>
+      <label>Plan ${i} Adoption (%): <input type="number" step="0.01" class="adoptionField" /></label>
+    `;
+    tierListDiv.appendChild(row);
+  }
 }
 
 /*********************
-* 4) The Calculation Logic (Mirrors Python)
-*********************/
+ * 4) The Calculation Logic (Mirrors Python)
+ *********************/
 function multiplyLists(listA, listB) {
-let sum = 0;
-for (let i = 0; i < listA.length; i++) {
-sum += (listA[i] * listB[i]);
-}
-return sum;
+  let sum = 0;
+  for (let i = 0; i < listA.length; i++) {
+    sum += (listA[i] * listB[i]);
+  }
+  return sum;
 }
 
 function calculateLifetimeValue(prices, adoptionRates, customerLifespan) {
-const averageRev = multiplyLists(prices, adoptionRates);
-const lifetimeValue = averageRev * customerLifespan;
-return { averageRev, lifetimeValue };
+  const averageRev = multiplyLists(prices, adoptionRates);
+  const lifetimeValue = averageRev * customerLifespan;
+  return { averageRev, lifetimeValue };
 }
 
 function validateAdoptionRates(adoptions) {
-const total = adoptions.reduce((acc, val) => acc + val, 0);
-return total <= 1.0;
+  const total = adoptions.reduce((acc, val) => acc + val, 0);
+  return total <= 1.0;
 }
 
 function processGoalsData(takeRate, homesPassed, targetTakeRate, totalMonthlyRevenue, customerLifespan) {
-const subscribers = takeRate * homesPassed;
-const monthlyRevenue = subscribers * totalMonthlyRevenue;
-const targetRevenue = targetTakeRate * homesPassed * totalMonthlyRevenue;
-const revenueGap = targetRevenue - monthlyRevenue;
-const customerGap = (targetTakeRate * homesPassed) - subscribers;
-const lifetimeValueGap = revenueGap * customerLifespan;
+  const subscribers = takeRate * homesPassed;
+  const monthlyRevenue = subscribers * totalMonthlyRevenue;
+  const targetRevenue = targetTakeRate * homesPassed * totalMonthlyRevenue;
+  const revenueGap = targetRevenue - monthlyRevenue;
+  const customerGap = (targetTakeRate * homesPassed) - subscribers;
+  const lifetimeValueGap = revenueGap * customerLifespan;
 
-return {
-subscribers,
-monthlyRevenue,
-targetRevenue,
-revenueGap,
-customerGap,
-lifetimeValueGap
-};
+  return {
+    subscribers,
+    monthlyRevenue,
+    targetRevenue,
+    revenueGap,
+    customerGap,
+    lifetimeValueGap
+  };
 }
 
 /*********************
-* 5) Collect Data & Calculate on "Calculate" button
-*********************/
+ * 5) Collect Data & Calculate on "Calculate" button
+ *********************/
 document.getElementById('calculateBtn').addEventListener('click', () => {
-// 5.1) Collect all service data (preset + custom)
-let allServices = [];
+  // 5.1) Collect all service data (preset + custom)
+  let allServices = [];
 
-// (A) Preset services
-document.querySelectorAll('.preset-check').forEach(chk => {
-if (chk.checked) {
-const svcName = chk.getAttribute('data-service');
-const tierListDiv = document.getElementById('tierList-' + svcName);
-if (!tierListDiv) return;
+  // (A) Preset services
+  document.querySelectorAll('.preset-check').forEach(chk => {
+    if (chk.checked) {
+      const svcName = chk.getAttribute('data-service');
+      const tierListDiv = document.getElementById('tierList-' + svcName);
+      if (!tierListDiv) return;
 
-// gather plan cost & adoption from each row
-const rows = tierListDiv.querySelectorAll('div');
-let prices = [];
-let adoptions = [];
-rows.forEach(row => {
-const priceEl = row.querySelector('.priceField');
-const adoptEl = row.querySelector('.adoptionField');
-const priceVal = parseFloat(priceEl.value) || 0;
-const adoptVal = parseFloat(adoptEl.value) || 0;
+      // gather plan cost & adoption from each row
+      const rows = tierListDiv.querySelectorAll('div');
+      let prices = [];
+      let adoptions = [];
+      rows.forEach(row => {
+        const priceEl = row.querySelector('.priceField');
+        const adoptEl = row.querySelector('.adoptionField');
+        const priceVal = parseFloat(priceEl.value) || 0;
+        const adoptVal = parseFloat(adoptEl.value) || 0;
 
-prices.push(priceVal);
-adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100); // or adoptVal * 0.01
-});
+        prices.push(priceVal);
+        adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100);
+      });
 
-// store in array
-if (prices.length > 0) {
-allServices.push({ name: svcName, prices, adoptions });
-}
-}
-});
+      // store in array
+      if (prices.length > 0) {
+        allServices.push({ name: svcName, prices, adoptions });
+      }
+    }
+  });
 
-// (B) Custom services
-document.querySelectorAll('#customServiceContainer .custom-service').forEach(svcDiv => {
-const svcHeader = svcDiv.querySelector('h4');
-if (!svcHeader) return;
-const svcTitle = svcHeader.textContent.replace('Remove', '').trim(); // e.g. "Business Internet"
+  // (B) Custom services
+  document.querySelectorAll('#customServiceContainer .custom-service').forEach(svcDiv => {
+    const svcHeader = svcDiv.querySelector('h4');
+    if (!svcHeader) return;
+    const svcTitle = svcHeader.textContent.replace('Remove', '').trim();
 
-const tierListDiv = svcDiv.querySelector('.tierList');
-if (!tierListDiv) return;
+    const tierListDiv = svcDiv.querySelector('.tierList');
+    if (!tierListDiv) return;
 
-let prices = [];
-let adoptions = [];
-const rows = tierListDiv.querySelectorAll('div');
-rows.forEach(row => {
-const priceEl = row.querySelector('.priceField');
-const adoptEl = row.querySelector('.adoptionField');
-const priceVal = parseFloat(priceEl.value) || 0;
-const adoptVal = parseFloat(adoptEl.value) || 0;
+    let prices = [];
+    let adoptions = [];
+    const rows = tierListDiv.querySelectorAll('div');
+    rows.forEach(row => {
+      const priceEl = row.querySelector('.priceField');
+      const adoptEl = row.querySelector('.adoptionField');
+      const priceVal = parseFloat(priceEl.value) || 0;
+      const adoptVal = parseFloat(adoptEl.value) || 0;
 
-prices.push(priceVal);
-adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100);
-});
+      prices.push(priceVal);
+      adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100);
+    });
 
-if (prices.length > 0) {
-allServices.push({ name: svcTitle, prices, adoptions });
-}
-});
+    if (prices.length > 0) {
+      allServices.push({ name: svcTitle, prices, adoptions });
+    }
+  });
 
-// If no services
-if (allServices.length === 0) {
-alert("No services were collected. Please select or add at least one service with valid tiers.");
-return;
-}
+  // If no services
+  if (allServices.length === 0) {
+    alert("No services were collected. Please select or add at least one service with valid tiers.");
+    return;
+  }
 
-// 5.2) Validate + sum up monthly revenue
-let totalMonthlyRevenue = 0;
-let totalLifetimeValue = 0;
+  // 5.2) Validate + sum up monthly revenue
+  let totalMonthlyRevenue = 0;
+  let totalLifetimeValue = 0;
 
-const lifespanVal = parseFloat(document.getElementById('lifespan').value) || 0;
+  const lifespanVal = parseFloat(document.getElementById('lifespan').value) || 0;
 
-// We'll gather messages to display each service's results
-let serviceMessages = [];
+  // We'll gather messages to display each service's results
+  let serviceMessages = [];
 
-for (let svc of allServices) {
-// Validate adoption
-const valid = validateAdoptionRates(svc.adoptions);
-if (!valid) {
-const totalAdopt = svc.adoptions.reduce((acc, v) => acc + v, 0) * 100;
-alert(`${svc.name} total adoption is ${totalAdopt.toFixed(2)}%, which exceeds 100%. Please fix.`);
-return; // stop calculation
-}
-// Calculate
-const { averageRev, lifetimeValue } = calculateLifetimeValue(svc.prices, svc.adoptions, lifespanVal);
-totalMonthlyRevenue += averageRev;
-totalLifetimeValue += lifetimeValue;
+  for (let svc of allServices) {
+    // Validate adoption
+    const valid = validateAdoptionRates(svc.adoptions);
+    if (!valid) {
+      const totalAdopt = svc.adoptions.reduce((acc, v) => acc + v, 0) * 100;
+      alert(`${svc.name} total adoption is ${totalAdopt.toFixed(2)}%, which exceeds 100%. Please fix.`);
+      return; // stop calculation
+    }
+    // Calculate
+    const { averageRev, lifetimeValue } = calculateLifetimeValue(svc.prices, svc.adoptions, lifespanVal);
+    totalMonthlyRevenue += averageRev;
+    totalLifetimeValue += lifetimeValue;
 
-serviceMessages.push(`
-<h4>${svc.name}</h4>
-<p>Average revenue per month: $${averageRev.toFixed(2)}<br>
-Lifetime value: $${lifetimeValue.toFixed(2)}</p>
-`);
-}
+    serviceMessages.push(`
+      <h4>${svc.name}</h4>
+      <p>Average revenue per month: $${averageRev.toFixed(2)}<br>
+      Lifetime value: $${lifetimeValue.toFixed(2)}</p>
+    `);
+  }
 
-// 5.3) Process goals
-const takeRateVal = (parseFloat(document.getElementById('takeRate').value) || 0) / 100;
-const homesPassedVal = parseFloat(document.getElementById('homesPassed').value) || 0;
-const targetTakeVal = (parseFloat(document.getElementById('targetTakeRate').value) || 0) / 100;
+  // 5.3) Process goals
+  const takeRateVal = (parseFloat(document.getElementById('takeRate').value) || 0) / 100;
+  const homesPassedVal = parseFloat(document.getElementById('homesPassed').value) || 0;
+  const targetTakeVal = (parseFloat(document.getElementById('targetTakeRate').value) || 0) / 100;
 
-const goals = processGoalsData(
-takeRateVal,
-homesPassedVal,
-targetTakeVal,
-totalMonthlyRevenue,
-lifespanVal
-);
+  const goals = processGoalsData(
+    takeRateVal,
+    homesPassedVal,
+    targetTakeVal,
+    totalMonthlyRevenue,
+    lifespanVal
+  );
 
-// 5.4) Build results HTML
-let html = "<h2>Results</h2>";
-html += serviceMessages.join('');
-html += `
-<h3>Summary Across All Services</h3>
-<p>Average customer monthly revenue (all services): <b>$${totalMonthlyRevenue.toFixed(2)}</b></p>
-<p>Average customer lifetime value (all services): <b>$${totalLifetimeValue.toFixed(2)}</b></p>
-<hr>
-<h3>Goals & Gaps</h3>
-<p>Current Monthly Revenue: <b>$${goals.monthlyRevenue.toFixed(2)}</b></p>
-<p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
-<p>Target Monthly Revenue: <b>$${goals.targetRevenue.toFixed(2)}</b></p>
-<p>Revenue Gap: <b>$${goals.revenueGap.toFixed(2)}</b></p>
-<p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
-<p>Lifetime Value Gap: <b>$${goals.lifetimeValueGap.toFixed(2)}</b></p>
-`;
+  // 5.4) Build results HTML
+  let html = "<h2>Results</h2>";
+  html += serviceMessages.join('');
+  html += `
+    <h3>Summary Across All Services</h3>
+    <p>Average customer monthly revenue (all services): <b>$${totalMonthlyRevenue.toFixed(2)}</b></p>
+    <p>Average customer lifetime value (all services): <b>$${totalLifetimeValue.toFixed(2)}</b></p>
+    <hr>
+    <h3>Goals & Gaps</h3>
+    <p>Current Monthly Revenue: <b>$${goals.monthlyRevenue.toFixed(2)}</b></p>
+    <p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
+    <p>Target Monthly Revenue: <b>$${goals.targetRevenue.toFixed(2)}</b></p>
+    <p>Revenue Gap: <b>$${goals.revenueGap.toFixed(2)}</b></p>
+    <p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
+    <p>Lifetime Value Gap: <b>$${goals.lifetimeValueGap.toFixed(2)}</b></p>
+  `;
 
-const resultsDiv = document.getElementById('results');
-resultsDiv.innerHTML = html;
-show(resultsDiv);
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.innerHTML = html;
+  show(resultsDiv);
 });
 </script>
 
