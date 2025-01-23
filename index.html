@@ -408,40 +408,34 @@ let html = "<h2>Results</h2>";
 html += serviceMessages.join('');
 html += `
   <h3>Summary Across All Services</h3>
-- <p>Average customer monthly revenue (all services): <b>$${totalMonthlyRevenue.toFixed(2)}</b></p>
-- <p>Average customer lifetime value (all services): <b>$${totalLifetimeValue.toFixed(2)}</b></p>
-+ <p>Average customer monthly revenue (all services):
-+   <b>${totalMonthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-+ </p>
-+ <p>Average customer lifetime value (all services):
-+   <b>${totalLifetimeValue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-+ </p>
+  <p>Average customer monthly revenue (all services):
+    <b>${totalMonthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Average customer lifetime value (all services):
+    <b>${totalLifetimeValue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
 
-<hr>
-<h3>Goals & Gaps</h3>
-- <p>Current Monthly Revenue: <b>$${goals.monthlyRevenue.toFixed(2)}</b></p>
-+ <p>Current Monthly Revenue:
-+   <b>${goals.monthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-+ </p>
-<p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
-- <p>Target Monthly Revenue: <b>$${goals.targetRevenue.toFixed(2)}</b></p>
-+ <p>Target Monthly Revenue:
-+   <b>${goals.targetRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-+ </p>
-- <p>Revenue Gap: <b>$${goals.revenueGap.toFixed(2)}</b></p>
-+ <p>Revenue Gap:
-+   <b>${goals.revenueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-+ </p>
-<p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
-- <p>Lifetime Value Gap: <b>$${goals.lifetimeValueGap.toFixed(2)}</b></p>
-+ <p>Lifetime Value Gap:
-+   <b>${goals.lifetimeValueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-+ </p>
+  <hr>
+  <h3>Goals & Gaps</h3>
+  <p>Current Monthly Revenue:
+    <b>${goals.monthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
+  <p>Target Monthly Revenue:
+    <b>${goals.targetRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Revenue Gap:
+    <b>${goals.revenueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
+  <p>Lifetime Value Gap:
+    <b>${goals.lifetimeValueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
 `;
 
-  const resultsDiv = document.getElementById('results');
-  resultsDiv.innerHTML = html;
-  show(resultsDiv);
+const resultsDiv = document.getElementById('results');
+resultsDiv.innerHTML = html;
+show(resultsDiv);
 });
 </script>
 
