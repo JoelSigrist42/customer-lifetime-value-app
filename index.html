@@ -47,6 +47,54 @@
     .custom-service {
       margin-bottom: 10px;
     }
+     /*********************
+ * Tooltip Icon Styles
+ *********************/
+.tooltip-icon {
+  display: inline-block;
+  background: #ccc;         
+  color: #000;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: help;         /* shows help pointer on hover */
+  margin-left: 6px;     /* small gap from label */
+  position: relative;   /* needed for .tooltip-text positioning */
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1.3;
+
+  /* position tooltip bubble above the icon */
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* transition for smooth fade-in */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  white-space: nowrap;  /* keep text on one line */
+  z-index: 999;
+}
+
+/* Show text on hover */
+.tooltip-icon:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -113,17 +161,42 @@ additional services you offer.  Then fill in the global data and click "Calculat
 <!-- GLOBAL DATA -->
 <div class="service-section">
   <h2>Global Data</h2>
-  <label>Customer Lifespan (months):
-    <input type="number" id="lifespan" value="36" />
-  </label>
-  <label>Take Rate (%):
-    <input type="number" id="takeRate" placeholder="e.g. 40" />
-  </label>
-  <label>Homes Passed:
-    <input type="number" id="homesPassed" placeholder="e.g. 10000" />
-  </label>
+<label>
+  Customer Lifespan (months):
+  <input type="number" id="lifespan" value="24" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      How many months does your average customer stay with you?
+    </span>
+  </span>
+</label>
+<label>
+  Take Rate (%):
+  <input type="number" id="takeRate" placeholder="e.g. 40" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      What percentage of your total homes passed
+      are subscribers to any of your services?
+    </span>
+  </span>
+</label>
+<label>
+  Homes Passed:
+  <input type="number" id="homesPassed" placeholder="e.g. 10000" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      How many residential units could you offer service to?
+    </span>
+  </span>
+</label>
   <label>Target Take Rate (%):
     <input type="number" id="targetTakeRate" placeholder="e.g. 60" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      What percentage of your total homes passed
+      are you targeting to get to subscribe to your services?
+    </span>
+  </span>
   </label>
 </div>
 
@@ -185,7 +258,21 @@ function generateTierFields(serviceName, numTiers) {
     const div = document.createElement('div');
     div.innerHTML = `
       <label>Plan ${i} Cost ($): <input type="number" step="0.01" class="priceField" /></label>
-      <label>Plan ${i} Adoption (%): <input type="number" step="0.01" class="adoptionField" /></label>
+div.innerHTML = `
+  <label>
+    Plan ${i} Cost ($):
+    <input type="number" step="0.01" class="priceField" />
+  </label>
+  <label>
+    Plan ${i} Adoption (%):
+    <input type="number" step="0.01" class="adoptionField" />
+    <span class="tooltip-icon">i
+      <span class="tooltip-text">
+        The percentage of your customers that are on this tier/plan.
+      </span>
+    </span>
+  </label>
+`;
     `;
     tierListDiv.appendChild(div);
   }
