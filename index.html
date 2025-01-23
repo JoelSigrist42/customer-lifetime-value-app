@@ -384,7 +384,7 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
 
     serviceMessages.push(`
       <h4>${svc.name}</h4>
-      <p>Average revenue per month: $${averageRev.toFixed(2)}<br>
+      <p>ARPU: $${averageRev.toFixed(2)}<br>
       Lifetime value: $${lifetimeValue.toFixed(2)}</p>
     `);
   }
@@ -414,7 +414,7 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
     <p>Current Monthly Revenue: <b>$${goals.monthlyRevenue.toFixed(2)}</b></p>
     <p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
     <p>Target Monthly Revenue: <b>$${goals.targetRevenue.toFixed(2)}</b></p>
-    <p>Revenue Gap: <b>$${goals.revenueGap.toFixed(2)}</b></p>
+    <p>Monthly Revenue Gap: <b>$${goals.revenueGap.toFixed(2)}</b></p>
     <p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
     <p>Lifetime Value Gap: <b>$${goals.lifetimeValueGap.toFixed(2)}</b></p>
   `;
