@@ -485,10 +485,10 @@ let html = "<h2>Results</h2>";
 html += serviceMessages.join('');
 html += `
   <h3>Summary Across All Services</h3>
-  <p>Average customer monthly revenue (all services):
+  <p>ARPU (monthly across all services):
     <b>${totalMonthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
   </p>
-  <p>Average customer lifetime value (all services):
+  <p>ARPU (lifetime across all services):
     <b>${totalLifetimeValue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
   </p>
 
