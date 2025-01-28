@@ -102,7 +102,7 @@
 <h1>Customer Lifetime Value Calculator</h1>
 
 <p>
-  Select which common services your company offers, specify the prices and adoption rates for each tier, and add any 
+  Select which common services your company offers, specify the prices and adoption rates for each plan, and add any 
 additional services you offer.  Then fill in the global data and click "Calculate"!
    This calculator is meant for residential services. Services with custom quotes for each customer don't apply.
 </p>
@@ -222,11 +222,9 @@ document.querySelectorAll('.preset-check').forEach(chk => {
     const fieldDiv = document.getElementById('tierFields-' + svcName);
 
     if (chk.checked) {
-      // Reveal a field asking "How many tiers?"
       generateTierPrompt(fieldDiv, svcName);
       show(fieldDiv);
     } else {
-      // Clear out fields & hide
       fieldDiv.innerHTML = '';
       hide(fieldDiv);
     }
@@ -235,7 +233,7 @@ document.querySelectorAll('.preset-check').forEach(chk => {
 
 function generateTierPrompt(container, serviceName) {
   container.innerHTML = `
-    <label>How many tiers for ${serviceName}?</label>
+    <label>How many plans for ${serviceName}?</label>
     <input type="number" min="1" value="1" class="tierCount" data-service="${serviceName}" />
     <button type="button" class="generateFieldsBtn" data-service="${serviceName}">Add Plan Information</button>
     <div class="tierList" id="tierList-${serviceName}"></div>
@@ -265,7 +263,7 @@ function generateTierFields(serviceName, numTiers) {
         <input type="number" step="0.01" class="adoptionField" />
         <span class="tooltip-icon">i
           <span class="tooltip-text">
-            The percentage of your customers that are on this tier/plan.
+            The percentage of your customers that are on this plan.
           </span>
         </span>
       </label>
@@ -296,7 +294,7 @@ document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
   div.innerHTML = `
     <h4>${svcName} <button type="button" data-id="${customId}" class="removeCustomBtn">Remove</button></h4>
     <div>
-      <label>Number of Tiers: </label>
+      <label>Number of Plans: </label>
       <input type="number" value="${numTiers}" min="1" class="tierCount" data-service="${svcName}" />
       <button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">Add Plan Information</button>
     </div>
@@ -380,17 +378,14 @@ function processGoalsData(takeRate, homesPassed, targetTakeRate, totalMonthlyRev
  * 5) Collect Data & Calculate on "Calculate" button
  *********************/
 document.getElementById('calculateBtn').addEventListener('click', () => {
-  // 5.1) Collect all service data (preset + custom)
   let allServices = [];
 
-  // (A) Preset services
   document.querySelectorAll('.preset-check').forEach(chk => {
     if (chk.checked) {
       const svcName = chk.getAttribute('data-service');
       const tierListDiv = document.getElementById('tierList-' + svcName);
       if (!tierListDiv) return;
 
-      // gather plan cost & adoption from each row
       const rows = tierListDiv.querySelectorAll('div');
       let prices = [];
       let adoptions = [];
@@ -404,7 +399,6 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
         adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100);
       });
 
-      // store in array
       if (prices.length > 0) {
         allServices.push({ name: svcName, prices, adoptions });
       }
@@ -440,7 +434,7 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
 
   // If no services
   if (allServices.length === 0) {
-    alert("No services were collected. Please select or add at least one service with valid tiers.");
+    alert("No services were collected. Please select or add at least one service with valid plans.");
     return;
   }
 
