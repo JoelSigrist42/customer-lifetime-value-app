@@ -237,7 +237,7 @@ function generateTierPrompt(container, serviceName) {
   container.innerHTML = `
     <label>How many tiers for ${serviceName}?</label>
     <input type="number" min="1" value="1" class="tierCount" data-service="${serviceName}" />
-    <button type="button" class="generateFieldsBtn" data-service="${serviceName}">Generate Fields</button>
+    <button type="button" class="generateFieldsBtn" data-service="${serviceName}">Add Plan Information</button>
     <div class="tierList" id="tierList-${serviceName}"></div>
   `;
 
@@ -298,7 +298,7 @@ document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
     <div>
       <label>Number of Tiers: </label>
       <input type="number" value="${numTiers}" min="1" class="tierCount" data-service="${svcName}" />
-      <button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">Generate Fields</button>
+      <button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">Add Plan Information</button>
     </div>
     <div class="tierList" id="tierList-${customId}"></div>
   `;
