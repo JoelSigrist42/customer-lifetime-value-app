@@ -17,11 +17,11 @@
       margin-bottom: 0.5em;
     }
     .service-section {
-      border: 1px solid #ddd;
-      background: #fff;
-      border-radius: 6px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .tier-fields {
       margin-left: 20px;
@@ -35,11 +35,11 @@
       width: 80px;
     }
     .results {
-      background: #ffffe0; /* light Yellow */
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-top: 20px;
-      padding: 20px;
+  background: #ffffe0; /* light Yellow */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 20px;
+  padding: 20px;
     }
     .hidden {
       display: none;
@@ -47,49 +47,54 @@
     .custom-service {
       margin-bottom: 10px;
     }
+     /*********************
+ * Tooltip Icon Styles
+ *********************/
+.tooltip-icon {
+  display: inline-block;
+  background: #ccc;         
+  color: #000;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: help;         /* shows help pointer on hover */
+  margin-left: 6px;     /* small gap from label */
+  position: relative;   /* needed for .tooltip-text positioning */
+}
 
-    /*********************
-     * Tooltip Icon Styles
-     *********************/
-    .tooltip-icon {
-      display: inline-block;
-      background: #ccc;         
-      color: #000;
-      border-radius: 50%;
-      width: 14px;
-      height: 14px;
-      line-height: 14px;
-      text-align: center;
-      font-size: 10px;
-      font-weight: bold;
-      cursor: help;
-      margin-left: 6px;
-      position: relative;
-    }
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1.3;
 
-    .tooltip-text {
-      visibility: hidden;
-      opacity: 0;
-      background-color: #333;
-      color: #fff;
-      text-align: left;
-      padding: 6px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      line-height: 1.3;
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: opacity 0.2s ease, visibility 0.2s ease;
-      white-space: nowrap;
-      z-index: 999;
-    }
+  /* position tooltip bubble above the icon */
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
 
-    .tooltip-icon:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
-    }
+  /* transition for smooth fade-in */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  white-space: nowrap;  /* keep text on one line */
+  z-index: 999;
+}
+
+/* Show text on hover */
+.tooltip-icon:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -98,8 +103,8 @@
 
 <p>
   Select which common services your company offers, specify the prices and adoption rates for each plan, and add any 
-  additional services you offer. Then fill in the global data and click "Calculate"!
-  This calculator is meant for residential services. Services with custom quotes for each customer don't apply.
+additional services you offer.  Then fill in the global data and click "Calculate"!
+   This calculator is meant for residential services. Services with custom quotes for each customer don't apply.
 </p>
 
 <!-- PRESET SERVICES -->
@@ -145,10 +150,8 @@
 <!-- CUSTOM SERVICES -->
 <div class="service-section">
   <h2>Add Other Services</h2>
-  <!-- 1) The list of custom services go here -->
-  <div id="customServiceList"></div>
-  <!-- 2) The panel for adding a new service remains at the bottom -->
-  <div id="addServicePanel">
+  <div id="customServiceContainer"></div>
+  <div>
     <label>Service Name: <input type="text" id="customServiceName" /></label>
     <label>Number of Tiers: <input type="number" id="customServiceTiers" min="1" value="1"/></label>
     <button type="button" id="addCustomServiceBtn">Add Other Service</button>
@@ -158,41 +161,40 @@
 <!-- GLOBAL DATA -->
 <div class="service-section">
   <h2>Global Data</h2>
-  <label>
-    Customer Lifespan (months):
-    <input type="number" id="lifespan" value="36" />
-    <span class="tooltip-icon">i
-      <span class="tooltip-text">
-        How many months does your average customer stay with you?
-      </span>
+<label>
+  Customer Lifespan (months):
+  <input type="number" id="lifespan" value="36" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      How many months does your average customer stay with you?
     </span>
-  </label>
-  <label>
-    Take Rate (%):
-    <input type="number" id="takeRate" placeholder="e.g. 40" />
-    <span class="tooltip-icon">i
-      <span class="tooltip-text">
-         Percentage of serviceable houses with service
-      </span>
+  </span>
+</label>
+<label>
+  Take Rate (%):
+  <input type="number" id="takeRate" placeholder="e.g. 40" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+       Percentage of serviceable houses with service
     </span>
-  </label>
-  <label>
-    Homes Passed:
-    <input type="number" id="homesPassed" placeholder="e.g. 10000" />
-    <span class="tooltip-icon">i
-      <span class="tooltip-text">
-        How many residential units could you offer service to?
-      </span>
+  </span>
+</label>
+<label>
+  Homes Passed:
+  <input type="number" id="homesPassed" placeholder="e.g. 10000" />
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      How many residential units could you offer service to?
     </span>
-  </label>
-  <label>
-    Target Take Rate (%):
+  </span>
+</label>
+  <label>Target Take Rate (%):
     <input type="number" id="targetTakeRate" placeholder="e.g. 60" />
-    <span class="tooltip-icon">i
-      <span class="tooltip-text">
-        Target percentage of serviceable houses with service
-      </span>
+  <span class="tooltip-icon">i
+    <span class="tooltip-text">
+      Target percentage of serviceable houses with service
     </span>
+  </span>
   </label>
 </div>
 
@@ -201,6 +203,9 @@
 <div id="results" class="results hidden"></div>
 
 <script>
+/*********************
+ * 1) Utility: Show or Hide an Element
+ *********************/
 function show(el) {
   el.classList.remove('hidden');
 }
@@ -208,11 +213,14 @@ function hide(el) {
   el.classList.add('hidden');
 }
 
-/********** 2) PRESET SERVICES **********/
+/*********************
+ * 2) Handling Preset Services
+ *********************/
 document.querySelectorAll('.preset-check').forEach(chk => {
   chk.addEventListener('change', () => {
     const svcName = chk.getAttribute('data-service');
     const fieldDiv = document.getElementById('tierFields-' + svcName);
+
     if (chk.checked) {
       generateTierPrompt(fieldDiv, svcName);
       show(fieldDiv);
@@ -230,7 +238,8 @@ function generateTierPrompt(container, serviceName) {
     <button type="button" class="generateFieldsBtn" data-service="${serviceName}">Add Plan Information</button>
     <div class="tierList" id="tierList-${serviceName}"></div>
   `;
-  container.querySelector('.generateFieldsBtn').addEventListener('click', e => {
+
+  container.querySelector('.generateFieldsBtn').addEventListener('click', (e) => {
     const tierCountEl = container.querySelector('.tierCount');
     const numTiers = parseInt(tierCountEl.value, 10) || 1;
     generateTierFields(serviceName, numTiers);
@@ -239,9 +248,11 @@ function generateTierPrompt(container, serviceName) {
 
 function generateTierFields(serviceName, numTiers) {
   const tierListDiv = document.getElementById('tierList-' + serviceName);
-  tierListDiv.innerHTML = '';
+  tierListDiv.innerHTML = ''; // clear existing
+
   for (let i = 1; i <= numTiers; i++) {
     const div = document.createElement('div');
+    // Single, valid template string assignment:
     div.innerHTML = `
       <label>
         Plan ${i} Cost ($):
@@ -261,17 +272,22 @@ function generateTierFields(serviceName, numTiers) {
   }
 }
 
-/********** 3) HANDLING CUSTOM SERVICES **********/
-const customServiceList = document.getElementById('customServiceList');
+/*********************
+ * 3) Handling Custom Services
+ *********************/
+const customContainer = document.getElementById('customServiceContainer');
 document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
   const svcNameInput = document.getElementById('customServiceName');
   const tiersInput = document.getElementById('customServiceTiers');
+
   const svcName = svcNameInput.value.trim();
   if (!svcName) {
     alert("Please enter a service name.");
     return;
   }
   const numTiers = parseInt(tiersInput.value, 10) || 1;
+
+  // Create a new section for this custom service
   const customId = 'custom-' + svcName.replace(/\s+/g, '_') + '-' + Date.now();
   const div = document.createElement('div');
   div.className = 'custom-service';
@@ -280,22 +296,28 @@ document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
     <div>
       <label>Number of Plans: </label>
       <input type="number" value="${numTiers}" min="1" class="tierCount" data-service="${svcName}" />
-      <button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">
-        Add Plan Information
-      </button>
+      <button type="button" class="generateFieldsBtn" data-svcid="${customId}" data-svcname="${svcName}">Add Plan Information</button>
     </div>
     <div class="tierList" id="tierList-${customId}"></div>
   `;
-  customServiceList.appendChild(div);
+  customContainer.appendChild(div);
+
+  // Immediately generate the fields for convenience
   generateCustomTierFields(customId, svcName, numTiers);
+
+  // Clear the add form
   svcNameInput.value = '';
   tiersInput.value = '1';
+
+  // Attach event to "Generate Fields" button
   div.querySelector('.generateFieldsBtn').addEventListener('click', e => {
     const localTiersCount = parseInt(div.querySelector('.tierCount').value, 10) || 1;
     generateCustomTierFields(customId, svcName, localTiersCount);
   });
+
+  // Attach event to "Remove" button
   div.querySelector('.removeCustomBtn').addEventListener('click', e => {
-    customServiceList.removeChild(div);
+    customContainer.removeChild(div);
   });
 });
 
@@ -312,11 +334,13 @@ function generateCustomTierFields(containerId, svcName, numTiers) {
   }
 }
 
-/********** 4) CALCULATION LOGIC **********/
+/*********************
+ * 4) The Calculation Logic (Mirrors Python)
+ *********************/
 function multiplyLists(listA, listB) {
   let sum = 0;
   for (let i = 0; i < listA.length; i++) {
-    sum += listA[i] * listB[i];
+    sum += (listA[i] * listB[i]);
   }
   return sum;
 }
@@ -339,6 +363,7 @@ function processGoalsData(takeRate, homesPassed, targetTakeRate, totalMonthlyRev
   const revenueGap = targetRevenue - monthlyRevenue;
   const customerGap = (targetTakeRate * homesPassed) - subscribers;
   const lifetimeValueGap = revenueGap * customerLifespan;
+
   return {
     subscribers,
     monthlyRevenue,
@@ -349,14 +374,18 @@ function processGoalsData(takeRate, homesPassed, targetTakeRate, totalMonthlyRev
   };
 }
 
-/********** 5) COLLECT DATA & CALCULATE **********/
+/*********************
+ * 5) Collect Data & Calculate on "Calculate" button
+ *********************/
 document.getElementById('calculateBtn').addEventListener('click', () => {
   let allServices = [];
+
   document.querySelectorAll('.preset-check').forEach(chk => {
     if (chk.checked) {
       const svcName = chk.getAttribute('data-service');
       const tierListDiv = document.getElementById('tierList-' + svcName);
       if (!tierListDiv) return;
+
       const rows = tierListDiv.querySelectorAll('div');
       let prices = [];
       let adoptions = [];
@@ -365,21 +394,26 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
         const adoptEl = row.querySelector('.adoptionField');
         const priceVal = parseFloat(priceEl.value) || 0;
         const adoptVal = parseFloat(adoptEl.value) || 0;
+
         prices.push(priceVal);
         adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100);
       });
+
       if (prices.length > 0) {
         allServices.push({ name: svcName, prices, adoptions });
       }
     }
   });
 
-  document.querySelectorAll('#customServiceList .custom-service').forEach(svcDiv => {
+  // (B) Custom services
+  document.querySelectorAll('#customServiceContainer .custom-service').forEach(svcDiv => {
     const svcHeader = svcDiv.querySelector('h4');
     if (!svcHeader) return;
     const svcTitle = svcHeader.textContent.replace('Remove', '').trim();
+
     const tierListDiv = svcDiv.querySelector('.tierList');
     if (!tierListDiv) return;
+
     let prices = [];
     let adoptions = [];
     const rows = tierListDiv.querySelectorAll('div');
@@ -388,34 +422,44 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
       const adoptEl = row.querySelector('.adoptionField');
       const priceVal = parseFloat(priceEl.value) || 0;
       const adoptVal = parseFloat(adoptEl.value) || 0;
+
       prices.push(priceVal);
       adoptions.push(adoptVal / 100 === 0 ? 0 : adoptVal / 100);
     });
+
     if (prices.length > 0) {
       allServices.push({ name: svcTitle, prices, adoptions });
     }
   });
 
+  // If no services
   if (allServices.length === 0) {
     alert("No services were collected. Please select or add at least one service with valid plans.");
     return;
   }
 
+  // 5.2) Validate + sum up monthly revenue
   let totalMonthlyRevenue = 0;
   let totalLifetimeValue = 0;
+
   const lifespanVal = parseFloat(document.getElementById('lifespan').value) || 0;
+
+  // We'll gather messages to display each service's results
   let serviceMessages = [];
 
   for (let svc of allServices) {
+    // Validate adoption
     const valid = validateAdoptionRates(svc.adoptions);
     if (!valid) {
       const totalAdopt = svc.adoptions.reduce((acc, v) => acc + v, 0) * 100;
       alert(`${svc.name} total adoption is ${totalAdopt.toFixed(2)}%, which exceeds 100%. Please fix.`);
-      return;
+      return; // stop calculation
     }
+    // Calculate
     const { averageRev, lifetimeValue } = calculateLifetimeValue(svc.prices, svc.adoptions, lifespanVal);
     totalMonthlyRevenue += averageRev;
     totalLifetimeValue += lifetimeValue;
+
     serviceMessages.push(`
       <h4>${svc.name}</h4>
       <p>ARPU: $${averageRev.toFixed(2)}<br>
@@ -423,9 +467,11 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
     `);
   }
 
+  // 5.3) Process goals
   const takeRateVal = (parseFloat(document.getElementById('takeRate').value) || 0) / 100;
   const homesPassedVal = parseFloat(document.getElementById('homesPassed').value) || 0;
   const targetTakeVal = (parseFloat(document.getElementById('targetTakeRate').value) || 0) / 100;
+
   const goals = processGoalsData(
     takeRateVal,
     homesPassedVal,
@@ -434,37 +480,39 @@ document.getElementById('calculateBtn').addEventListener('click', () => {
     lifespanVal
   );
 
-  let html = "<h2>Results</h2>";
-  html += serviceMessages.join('');
-  html += `
-    <h3>Summary Across All Services</h3>
-    <p>ARPU (monthly across all services):
-      <b>${totalMonthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-    </p>
-    <p>ARPU (lifetime across all services):
-      <b>${totalLifetimeValue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-    </p>
+  // 5.4) Build results HTML
+let html = "<h2>Results</h2>";
+html += serviceMessages.join('');
+html += `
+  <h3>Summary Across All Services</h3>
+  <p>ARPU (monthly across all services):
+    <b>${totalMonthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>ARPU (lifetime across all services):
+    <b>${totalLifetimeValue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
 
-    <hr>
-    <h3>Goals & Gaps</h3>
-    <p>Current Monthly Revenue:
-      <b>${goals.monthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-    </p>
-    <p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
-    <p>Target Monthly Revenue:
-      <b>${goals.targetRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-    </p>
-    <p>Monthly Revenue Gap:
-      <b>${goals.revenueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-    </p>
-    <p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
-    <p>Lifetime Value Gap:
-      <b>${goals.lifetimeValueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
-    </p>
-  `;
-  const resultsDiv = document.getElementById('results');
-  resultsDiv.innerHTML = html;
-  show(resultsDiv);
+  <hr>
+  <h3>Goals & Gaps</h3>
+  <p>Current Monthly Revenue:
+    <b>${goals.monthlyRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Subscribers: <b>${goals.subscribers.toFixed(0)}</b></p>
+  <p>Target Monthly Revenue:
+    <b>${goals.targetRevenue.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Monthly Revenue Gap:
+    <b>${goals.revenueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+  <p>Customer Gap: <b>${goals.customerGap.toFixed(0)}</b></p>
+  <p>Lifetime Value Gap:
+    <b>${goals.lifetimeValueGap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</b>
+  </p>
+`;
+
+const resultsDiv = document.getElementById('results');
+resultsDiv.innerHTML = html;
+show(resultsDiv);
 });
 </script>
 
