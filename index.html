@@ -276,6 +276,8 @@ function generateTierFields(serviceName, numTiers) {
  * 3) Handling Custom Services
  *********************/
 const customContainer = document.getElementById('customServiceContainer');
+const addServiceForm = document.getElementById('addCustomServiceForm');
+
 document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
   const svcNameInput = document.getElementById('customServiceName');
   const tiersInput = document.getElementById('customServiceTiers');
@@ -292,6 +294,7 @@ document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
   const div = document.createElement('div');
   div.className = 'custom-service';
   div.innerHTML = `
+    <hr>
     <h4>${svcName} <button type="button" data-id="${customId}" class="removeCustomBtn">Remove</button></h4>
     <div>
       <label>Number of Plans: </label>
@@ -300,12 +303,14 @@ document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
     </div>
     <div class="tierList" id="tierList-${customId}"></div>
   `;
+
+  // Append below existing services instead of inserting before the input fields
   customContainer.appendChild(div);
 
   // Immediately generate the fields for convenience
   generateCustomTierFields(customId, svcName, numTiers);
 
-  // Clear the add form
+  // Clear the add form fields
   svcNameInput.value = '';
   tiersInput.value = '1';
 
@@ -321,21 +326,8 @@ document.getElementById('addCustomServiceBtn').addEventListener('click', () => {
   });
 });
 
-function generateCustomTierFields(containerId, svcName, numTiers) {
-  const tierListDiv = document.getElementById('tierList-' + containerId);
-  tierListDiv.innerHTML = '';
-  for (let i = 1; i <= numTiers; i++) {
-    const row = document.createElement('div');
-    row.innerHTML = `
-      <label>Plan ${i} Cost ($): <input type="number" step="0.01" class="priceField" /></label>
-      <label>Plan ${i} Adoption (%): <input type="number" step="0.01" class="adoptionField" /></label>
-    `;
-    tierListDiv.appendChild(row);
-  }
-}
-
 /*********************
- * 4) The Calculation Logic (Mirrors Python)
+ * 4) The Calculation Logic
  *********************/
 function multiplyLists(listA, listB) {
   let sum = 0;
